@@ -3,7 +3,7 @@ import random
 from collections import namedtuple, deque
 from typing import Tuple
 
-from model import QNetwork
+from navigation.model import QNetwork
 
 import torch
 import torch.nn.functional as F
@@ -22,7 +22,9 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 class DQNAgent:
     """Interacts with and learns from the environment."""
 
-    def __init__(self, state_size: int, action_size: int, seed: int):
+    def __init__(self, state_size: int, action_size: int, seed: int,
+                 lr: float = LR, discount_factor: float = GAMMA,
+                 batch_size: int = BATCH_SIZE):
         """Initialize an Agent object.
 
         Params
@@ -30,18 +32,22 @@ class DQNAgent:
             state_size (int): dimension of each state
             action_size (int): dimension of each action
             seed (int): random seed
+            lr (float): learning rate for the agent's NN
+            discount_factor (float): discount rate
         """
         self.state_size = state_size
         self.action_size = action_size
-        random.seed(seed)
+        self.gamma = discount_factor
+        self.batch_size = batch_size
+        self.seed = random.seed(seed)
 
         # Q-Network
         self.qnetwork_local = QNetwork(state_size, action_size, seed).to(device)
         self.qnetwork_target = QNetwork(state_size, action_size, seed).to(device)
-        self.optimizer = optim.Adam(self.qnetwork_local.parameters(), lr=LR)
+        self.optimizer = optim.Adam(self.qnetwork_local.parameters(), lr=lr)
 
         # Replay memory
-        self.memory = ReplayBuffer(action_size, BUFFER_SIZE, BATCH_SIZE, seed)
+        self.memory = ReplayBuffer(action_size, BUFFER_SIZE, self.batch_size, seed)
         # Initialize time step (for updating every UPDATE_EVERY steps)
         self.t_step = 0
 
@@ -53,9 +59,9 @@ class DQNAgent:
         self.t_step = (self.t_step + 1) % UPDATE_EVERY
         if self.t_step == 0:
             # If enough samples are available in memory, get random subset and learn
-            if len(self.memory) > BATCH_SIZE:
+            if len(self.memory) > self.batch_size:
                 experiences = self.memory.sample()
-                self.learn(experiences, GAMMA)
+                self.learn(experiences, self.gamma)
 
     def act(self, state: np.ndarray, eps: float = 0.) -> int:
         """Returns actions for given state as per current policy.
