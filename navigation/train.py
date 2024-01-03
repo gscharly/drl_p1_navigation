@@ -1,3 +1,7 @@
+"""
+Script that can be used to train a DQL agent to solve the Unity Bananas environment.
+"""
+
 import argparse
 from collections import deque
 

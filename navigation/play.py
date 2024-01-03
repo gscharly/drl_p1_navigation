@@ -1,3 +1,7 @@
+"""
+Script that can be used to play the Unity Bananas enviroment with a pretrained agent.
+"""
+
 import argparse
 
 import torch
@@ -7,6 +11,15 @@ from navigation.agent import DQNAgent
 
 
 def play_with_agent(env: UnityEnvironment, brain_nm: str, agent: DQNAgent):
+    """
+    Uses a pretrained agent to play a Unity environment.
+
+    Params
+    ======
+        env (UnityEnvironment): Unity environment
+        brain_nm (str): brain name
+        agent (DQNAgent): DQNAgent instance
+    """
     env_info = env.reset(train_mode=False)[brain_nm]  # reset the environment
     state = env_info.vector_observations[0]  # get the current state
     score = 0  # initialize the score
