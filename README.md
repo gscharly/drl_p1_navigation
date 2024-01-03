@@ -33,7 +33,7 @@ This repository should be cloned, and the instructions on the README should be f
 dependencies.
 
 # Instructions
-The repository contains 2 scripts: train.py and play.py.
+The repository contains 2 scripts under the navigation package: train.py and play.py.
 
 ## Train
 The script train.py can be used to train the agent. It accepts the following arguments:

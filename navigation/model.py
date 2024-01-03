@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-
+# From https://github.com/udacity/deep-reinforcement-learning/blob/master/dqn/solution/model.py
 class QNetwork(nn.Module):
     """Actor (Policy) Model."""
 

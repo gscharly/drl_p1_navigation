@@ -1,5 +1,5 @@
 """
-Script that can be used to play the Unity Bananas enviroment with a pretrained agent.
+Script that can be used to play the Unity Bananas environment with a pretrained agent.
 """
 
 import argparse
