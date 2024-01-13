@@ -63,3 +63,5 @@ the agent's weights paths:
 python play.py --env-path /home/carlos/cursos/udacity_rl_2023/repos/deep-reinforcement-learning/p1_navigation/Banana_Linux/Banana.x86_64
 --weights-path /home/carlos/cursos/udacity_rl_2023/projects/drl_p1_navigation/weights/agent_weights.pth
 ```
+![Alt Text](./ipynb/agent.gif)
+
