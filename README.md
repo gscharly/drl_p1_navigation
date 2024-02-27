@@ -4,6 +4,8 @@ of the Udacity Deep Reinforcement Learning (DRL) course.
 
 # Environment
 
+![Alt Text](./ipynb/agent.gif)
+
 The environment consists of a single agent that has to pick up yellow bananas while avoiding blue bananas. A reward
 of +1 is provided for collecting yellow bananas, and a reward of -1 for blue ones.
 
@@ -63,5 +65,4 @@ the agent's weights paths:
 python play.py --env-path /home/carlos/cursos/udacity_rl_2023/repos/deep-reinforcement-learning/p1_navigation/Banana_Linux/Banana.x86_64
 --weights-path /home/carlos/cursos/udacity_rl_2023/projects/drl_p1_navigation/weights/agent_weights.pth
 ```
-![Alt Text](./ipynb/agent.gif)
 
